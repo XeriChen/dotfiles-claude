@@ -41,11 +41,9 @@ For reference, my personal configs that pair well with this setup:
 
 - **settings.json** — permissions, hooks, MCP plugins, environment variables
 - **hooks/** — guardrails for safe tool use (block heredocs, enforce Write tool, etc.)
-- **skills/** — 53 skill packs (browser automation, translation, shader dev, and more)
-- **plugins/** — installed plugins via marketplaces (`claude-hud`, `claude-plugins-official`, `openai-codex`)
+- **skills/** — 27 skill packs (browser automation, translation, shader dev, and more)
+- **plugins/** — installed plugins via marketplaces (`claude-hud`, `claude-plugins-official`)
 - **integration.sh / .fish** — `claude` wrapper and model shortcuts
-- **bin/claude-commit** — standalone commit helper using Haiku
-- **integration-providers.sh / .fish** — optional shortcuts that route claude through third-party Anthropic-compatible endpoints (glm/deepseek/qwen/ofox; see the file header for the API key each maps to).
 - **CLAUDE.md** — global coding preferences and rules
 
 ## Defaults you should know
@@ -55,19 +53,3 @@ For reference, my personal configs that pair well with this setup:
 The actual safety layer lives in `hooks/no-*.sh` — mkfs / partition edits, writes to `/dev`, `/etc`, `/proc`, `/sys`, `/boot`, secure-delete, power-state, recursive chmod/chown, firewall flush, force-push, `git --amend`, `crontab -r`, `killall`, etc. All gates are soft reminders — there are explicit `# BYPASS_*_CHECK` markers so Claude can bypass one specific hazard to avoid trying bizarre workarounds. They are safety nets preventing accidental irreversible mistakes, in the belief that LLMs are not deliberately evil. Locking LLMs into a cage makes them do nothing but chat.
 
 To restore standard prompts: set `"defaultMode": "default"` in `settings.json`.
-
-## Audit Hook
-
-An audit stop hook fires on Claude's final response after several edits, to review correctness and AI slop patterns, both in code and docs.
-
-It starts `claude` and `codex` headless; when issues are flagged, it reports to the main agent to ask it to fix them.
-
-> Bypass `codex` if not installed or not logged in.
-
-After used for a couple of weeks, you may show history audit stats:
-
-```bash
-~/.claude/hooks/audit-edits.py stats
-```
-
-Tweak `"env"` in `~/.claude/settings.json` to edit `"AUDIT_BACKEND": "both"` to `none|claude|codex|both` to configure.

@@ -31,17 +31,14 @@ case "$shell_name" in
     bash)
         rc="$HOME/.bashrc"
         line="source ~/.claude/integration.sh"
-        provider_line="source ~/.claude/integration-providers.sh"
         ;;
     zsh)
         rc="$HOME/.zshrc"
         line="source ~/.claude/integration.sh"
-        provider_line="source ~/.claude/integration-providers.sh"
         ;;
     fish)
         rc="$HOME/.config/fish/config.fish"
         line="source ~/.claude/integration.fish"
-        provider_line="source ~/.claude/integration-providers.fish"
         ;;
     *)
         echo "${RED}Could not detect bash/zsh/fish (\$SHELL=${SHELL:-unset}). Edit your rc file by hand.${RESET}" >&2
@@ -68,12 +65,6 @@ read -r -p "Add core integration to ${rc}? [Y/n] " ans
 case "${ans:-y}" in
     y|Y|yes|YES) ensure_line "$rc" "$line" "core integration" ;;
     *)           echo "  ${YELLOW}skipped core integration${RESET}" ;;
-esac
-
-read -r -p "Add provider shortcuts (glm/deepseek/qwen/ofox)? [y/N] " ans
-case "${ans:-n}" in
-    y|Y|yes|YES) ensure_line "$rc" "$provider_line" "provider shortcuts" ;;
-    *)           echo "  ${YELLOW}skipped provider shortcuts${RESET}" ;;
 esac
 
 echo

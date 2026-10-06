@@ -85,3 +85,6 @@ RTK.md
 .caveman-history.jsonl
 .caveman-statusline-suffix
 CLAUDE.local.md
+
+# dsh plugin debug probe artifacts
+/.dsh-probe

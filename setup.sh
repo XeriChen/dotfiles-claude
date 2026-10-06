@@ -17,11 +17,10 @@ fi
 
 # Hard dependencies. `claude` runs the harness this whole config targets;
 # `git` clones/updates this repo below; `jq` parses every PreToolUse/PostToolUse
-# hook payload; `uv` runs audit-edits.py (Stop hook + PreToolUse Write/Edit/
-# MultiEdit); `node` runs the codex plugin's lifecycle/stop hooks; `npx`
-# launches one-shot skill helpers like `npx defuddle`, `npx -y mcporter`,
-# `npx skills`, `npx agent-browser`. Without these, install fails or hooks
-# error on every tool call.
+# hook payload; `uv` runs the repo's Python-based hooks (drift-detect.py at
+# Stop time); `node` backs the `npx` one-shot skill helpers (`npx defuddle`,
+# `npx -y mcporter`, `npx skills`, `npx agent-browser`). Without these, install
+# fails or hooks error on every tool call.
 missing=()
 for dep in claude git jq uv node npx; do
     command -v "$dep" >/dev/null 2>&1 || missing+=("$dep")
@@ -155,8 +154,3 @@ echo
 echo "${YELLOW}${BOLD}Optional next steps:${RESET}"
 echo "  ${CYAN}bash ~/.claude/integration-install.sh${RESET}  ${DIM}— wire the shell integration into your rc file${RESET}"
 echo "  ${CYAN}claude \"which CLI tools in ~/.claude/CLAUDE.md am I missing?\"${RESET}  ${DIM}— inventory preferred CLI tools${RESET}"
-if ! command -v codex >/dev/null 2>&1; then
-    echo "  ${CYAN}npm install -g @openai/codex${RESET}  ${DIM}— optional co-op: enables /codex:rescue, /codex:review, and the stop-time review gate${RESET}"
-elif ! codex login status >/dev/null 2>&1; then
-    echo "  ${CYAN}codex login${RESET}  ${DIM}— optional co-op: codex CLI is installed but not authed${RESET}"
-fi

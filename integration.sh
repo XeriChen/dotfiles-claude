@@ -1,8 +1,3 @@
-case ":$PATH:" in
-    *":$HOME/.claude/bin:"*) ;;
-    *) PATH="$HOME/.claude/bin:$PATH" ;;
-esac
-
 claude() {
     local _session
     _session="$(basename "$PWD")-$(openssl rand -hex 8 2>/dev/null || printf '%05x%05x' $RANDOM $RANDOM)"

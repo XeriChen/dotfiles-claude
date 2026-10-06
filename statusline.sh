@@ -148,24 +148,8 @@ if [[ -n "$session_id" ]]; then
 fi
 
 # Warm sessions run the python hooks; cold ones skip them. Unknown counts as warm.
-# An in-flight audit also counts as warm: it outlives the transcript write that
-# triggered it, and its "auditing…" marker is the one thing we must keep polling.
 warm=1
 [[ -n "$elapsed" ]] && (( elapsed >= 300 )) && warm=0
-if (( ! warm )) && [[ -n "$session_id" ]]; then
-  shopt -s nullglob
-  auditing=("/tmp/claude-${UID}-state/audit/${session_id}.json.auditing-"*)
-  shopt -u nullglob
-  (( ${#auditing[@]} )) && warm=1
-fi
-
-# --- audit segment -----------------------------------------------------------
-# Logic and color/TTL contract live in audit-edits.py statusline subcommand.
-# Output already includes leading whitespace; empty string when nothing applies.
-audit_segment=""
-if [[ -n "$session_id" ]] && (( warm )); then
-  audit_segment=$(~/.claude/hooks/audit-edits.py statusline "$session_id" 2>/dev/null || true)
-fi
 
 # --- idle segment -------------------------------------------------------------
 # Hidden <2min, blue 2–5min, gray ≥5min (cache TTL).
@@ -204,4 +188,4 @@ fi
 # --- compose -----------------------------------------------------------------
 left="${model_segment}${ctx_segment}"
 [[ -n "$left" && -n "$cwd_segment" ]] && left+="  "
-printf '%s%s%s%s%s%s%s\n' "$left" "$cwd_segment" "$git_segment" "$audit_segment" "$idle_segment" "$drift_segment" "$file_segment"
+printf '%s%s%s%s%s%s\n' "$left" "$cwd_segment" "$git_segment" "$idle_segment" "$drift_segment" "$file_segment"

@@ -40,7 +40,7 @@ SID=$(jq -r '.session_id // "unknown"' <<< "$input")
 # Skip subagents — agent-* prefix on session_id. The hint asks Claude to
 # spawn the claude-code-guide subagent via the Agent tool, but most
 # subagents (code-review, doc-review, ai-slop-review, claude-code-guide
-# itself, web-researcher, Explore, Plan, codex-rescue, statusline-setup)
+# itself, Explore, Plan, statusline-setup)
 # don't have the Agent tool and can't act on this advice.
 case "$SID" in agent-*) exit 0 ;; esac
 

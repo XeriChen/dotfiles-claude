@@ -12,13 +12,7 @@
     "BASH_MAX_TIMEOUT_MS": "240000",
     "CLAUDE_AUTO_BACKGROUND_TASKS": "1",
     "CLAUDE_CODE_NEW_INIT": "1",
-    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
-    "AUDIT_BACKEND": "none",
-    "AUDIT_CODEX_MODEL": "gpt-5.6-luna",
-    "AUDIT_CODEX_EFFORT": "medium",
-    "AUDIT_CLAUDE_MODEL": "haiku",
-    "AUDIT_CLAUDE_EFFORT": "high",
-    "CAVEMAN_DEFAULT_MODE": "ultra"
+    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1"
   },
   "attribution": {
     "sessionUrl": false
@@ -50,105 +44,75 @@
             "type": "command",
             "command": "bash ~/.claude/hooks/no-head-read.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/no-head-tail-pipe.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/no-bg-head-tail-pipe.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/no-heredoc.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/no-cat-write.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/no-background-ampersand.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/no-sed-print.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/no-git-amend.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/no-destructive-git.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/no-devnull-redirect.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/no-dangerous-ops.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/python-unbuffered.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/no-pip-npm.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/hint-skill-babysit.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/hint-skill-agent-browser.sh",
             "timeout": 5
           }
         ]
@@ -160,35 +124,10 @@
             "type": "command",
             "command": "bash ~/.claude/hooks/no-worktree-team.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Agent",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/explore-model-sonnet.sh",
-            "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/hooks/python-unbuffered.sh",
-            "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/hooks/no-pip-npm.sh",
             "timeout": 5
           }
         ]
@@ -199,16 +138,6 @@
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/no-multi-question.sh",
-            "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/audit-edits.py hook",
             "timeout": 5
           }
         ]
@@ -242,26 +171,6 @@
             "timeout": 5
           }
         ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/hooks/hint-skill-babysit.sh",
-            "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/hooks/hint-skill-agent-browser.sh",
-            "timeout": 5
-          }
-        ]
       }
     ],
     "PostToolUse": [
@@ -272,22 +181,12 @@
             "type": "command",
             "command": "bash ~/.claude/hooks/prefer-uv-run.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/python-unbuffered-post.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/warn-auto-bg-head-tail-pipe.sh",
@@ -356,18 +255,6 @@
         ]
       }
     ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/audit-edits.py stop-hook",
-            "timeout": 300,
-            "asyncRewake": true
-          }
-        ]
-      }
-    ],
     "UserPromptSubmit": [
       {
         "hooks": [
@@ -417,7 +304,6 @@
     "claude-hud@claude-hud": false,
     "code-simplifier@claude-plugins-official": false,
     "claude-md-management@claude-plugins-official": false,
-    "codex@openai-codex": true,
     "plugin-dev@claude-plugins-official": false,
     "code-review@claude-plugins-official": false,
     "typescript-lsp@claude-plugins-official": false,
@@ -432,12 +318,6 @@
       "source": {
         "source": "github",
         "repo": "jarrodwatts/claude-hud"
-      }
-    },
-    "openai-codex": {
-      "source": {
-        "source": "github",
-        "repo": "openai/codex-plugin-cc"
       }
     },
     "caveman": {
